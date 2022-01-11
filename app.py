@@ -1,6 +1,6 @@
 import streamlit as st
 import spacy
-from spacy import displacy
+import spacy_streamlit
 from annotated_text import annotated_text
 
 
@@ -80,5 +80,5 @@ if parataxis:
     st.markdown("---")
     st.write(msg)
 
-# st.markdown("---")
-# displacy.serve(doc, style="dep")
+st.markdown("---")
+spacy_streamlit.visualize(selected_model, doc)

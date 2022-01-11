@@ -80,5 +80,5 @@ if parataxis:
     st.markdown("---")
     st.write(msg)
 
-st.markdown("---")
-displacy.serve(doc, style="dep")
+# st.markdown("---")
+# displacy.serve(doc, style="dep")

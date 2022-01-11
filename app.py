@@ -1,5 +1,6 @@
 import streamlit as st
 import spacy
+from spacy import displacy
 from annotated_text import annotated_text
 
 
@@ -78,3 +79,6 @@ if parataxis:
     st.markdown("**Parataxis test**")
     st.markdown("---")
     st.write(msg)
+
+st.markdown("---")
+displacy.serve(doc, style="dep")

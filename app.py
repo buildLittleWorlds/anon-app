@@ -1,15 +1,13 @@
 import streamlit as st
 import spacy
 # import spacy_streamlit
-from annotated_text import annotated_text
+# from annotated_text import annotated_text
 
 
 @st.cache(show_spinner=False, allow_output_mutation=True, suppress_st_warning=True)
-def load_models():
-    french_model = spacy.load("./models/fr/")
-    english_model = spacy.load("./models/en/")
-    models = {"en": english_model, "fr": french_model}
-    return models
+def load_model():
+    model = spacy.load("./models/en/")
+    return model
 
 def check_for_deps(sent):
   off_limits = ['csubj', 'csubjpass', 'relcl', 'advcl', 'mark']
@@ -42,15 +40,15 @@ def check_for_deps(sent):
 #     return tokens
 
 
-models = load_models()
+model = load_model()
 
-selected_language = st.sidebar.selectbox("Select a language", options=["en", "fr"])
-selected_entities = st.sidebar.multiselect(
-    "Select the entities you want to detect",
-    options=["LOC", "PER", "ORG"],
-    default=["LOC", "PER", "ORG"],
-)
-selected_model = models[selected_language]
+# selected_language = st.sidebar.selectbox("Select a language", options=["en", "fr"])
+# selected_entities = st.sidebar.multiselect(
+#     "Select the entities you want to detect",
+#     options=["LOC", "PER", "ORG"],
+#     default=["LOC", "PER", "ORG"],
+# )
+# selected_model = models[selected_language]
 
 text_input = st.text_area("Type a text to check for parataxis")
 
@@ -72,7 +70,7 @@ if uploaded_file is not None:
 #     annotated_text(*anonymized_tokens)
 
 parataxis = st.checkbox("Check for parataxis")
-doc = selected_model(text_input)
+doc = model(text_input)
 msg = check_for_deps(doc)
 
 if parataxis:
